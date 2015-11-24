@@ -10,21 +10,18 @@ class BasalInLine(admin.TabularInline):
 
 class EpisodioInLine(admin.TabularInline):
     model = Episodio
-    """
-    def link(self, instance):
-        url =reverse('admin:%s_%s_change' % (instance._meta.app_label,  
-                                              instance._meta.module_name),
-                      args=(instance.id,))
-        return mark_safe("<a href='%s'>Editar</a>" % url)
-    """
     extra = 0
     show_change_link = True
 
     #fields = ("h_inicio", 'tipo')
     readonly_fields = ('tipo',)
 
+class EpisodioAdmin(admin.ModelAdmin):
+    inlines = [BasalInLine,]
+
 class PacienteAdmin(admin.ModelAdmin):
     inlines = [EpisodioInLine,]
 
 admin.site.register(Paciente, PacienteAdmin)
-admin.site.register(Episodio)
+admin.site.register(Episodio, EpisodioAdmin)
+admin.site.register(Basal)
