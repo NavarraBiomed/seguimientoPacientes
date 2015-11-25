@@ -46,8 +46,8 @@ class Intervencion(models.Model):
 
 class Extraccion(models.Model):
         Intervencion = models.ForeignKey('Intervencion')
-        variable_extraccion = models.IntegerField(verbose_name="Placeholder variable")
-
+        extr_var = models.CharField(max_length=30, default="")
+        
 class Tratamiento(models.Model):
         episodio = models.ForeignKey('Episodio')
         ecocardio_cardiembolico = models.IntegerField(verbose_name="Cardioembolicas")
