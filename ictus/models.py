@@ -42,7 +42,19 @@ class Basal(models.Model):
 
 class Intervencion(models.Model):
 	episodio = models.ForeignKey('Episodio')
-	anticoag_nombre = models.CharField(max_length=300, default="")
+	anticoag_nombre = models.CharField(max_length=300)
 
 class Extraccion(models.Model):
-	Intervencion = models.ForeignKey('Intervencion')
+        Intervencion = models.ForeignKey('Intervencion')
+        variable_extraccion = models.IntegerField(verbose_name="Placeholder variable")
+
+class Tratamiento(models.Model):
+        episodio = models.ForeignKey('Episodio')
+        ecocardio_cardiembolico = models.IntegerField(verbose_name="Cardioembolicas")
+        ecotsa = models.CharField(max_length = 3000)
+        ###Más variables aquí##)
+
+class Seguimiento(models.Model):
+        episodio = models.ForeignKey('Episodio')
+        variable_seguimiento = models.CharField(max_length = 30, verbose_name="Placeholder variable seg")
+        ##variables##
