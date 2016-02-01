@@ -140,7 +140,7 @@ class Paciente(models.Model):
     NHC = models.IntegerField(verbose_name="NHC")
     nombre = models.CharField(verbose_name = "Nombre del paciente ", max_length = 30)
     iniciales = models.CharField(verbose_name = "Iniciales del paciente", max_length = 6)
-    fecha_nacimiento = models.DateField(verbose_name = "Fecha de nacimiento");
+    fecha_nacimiento = models.DateField(verbose_name = "Fecha de nacimiento")
     genero = models.CharField(verbose_name = "Género", choices = _SEXO, max_length = 2)
     grupo_etnico = models.CharField(verbose_name = "Grupo étnico", choices = _ETNIA, max_length = 2)
 
@@ -172,7 +172,7 @@ class Episodio(models.Model):
         tratamiento_interarterial = models.CharField(verbose_name = "Tratamiento Interarterial", choices = _SI_NO_INDET, max_length = 2)
 
         def __str__(self):
-            locale.setlocale(locale.LC_TIME, "es_ES")
+            locale.setlocale(locale.LC_TIME, '')
             return self.paciente.nombre + " - " + _TIPO_ICTUS[int(self.tipo_ictus)][1] + " ("+self.fecha_inicio.strftime("%d de %B, %Y")+")"
         ###elf.paciente.nombre + " - "+self.tipo_ictus+" ("+str(self.h_default = timezone.nowinicio)+")"
 
