@@ -1,0 +1,19 @@
+.nav-bar{
+	height: 1em;
+	display: flex;
+	align-items: center;
+	padding: 0 2em;
+}
+
+.nav-bar * {
+	font-size: 1.5rem;
+	font-weight: 300;
+	margin: 0 0.5em;
+	text-transform: uppercase;
+	
+}
+
+.nav-bar a{
+	cursor: pointer;
+	text-decoration: none;
+}

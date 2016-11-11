@@ -149,7 +149,7 @@ class Paciente(models.Model):
 
 class Episodio(models.Model):
         paciente = models.ForeignKey('Paciente')
-        fecha_inicio = models.DateTimeField(verbose_name = "Fecha ictus",default = timezone.now)
+        fecha_inicio = models.DateField(verbose_name = "Fecha ictus",default = timezone.now)
         h_inicio = models.TimeField(verbose_name = "Hora de inicio", default = timezone.now)
         hora_inicio_indet = models.BooleanField( verbose_name = "Hora indeterminada", default = False)
         tipo_ictus = models.CharField( verbose_name = "Tipo de ictus", choices = _TIPO_ICTUS, max_length = 2)
@@ -161,14 +161,14 @@ class Episodio(models.Model):
         ait = models.CharField(verbose_name = "AIT", choices = _SI_NO_INDET, max_length = 2)
         ait_duracion = models.TimeField(verbose_name = "Duración AIT", default = timezone.now)
         ait_neuroimagen = models.CharField(verbose_name = "Neuroimagen AIT", choices = _SI_NO_INDET, max_length = 2)
-        ait_bcd2 = models.IntegerField(verbose_name = "ABCD2", choices = _ESCALA_AIT, blank = True)
+        ait_bcd2 = models.IntegerField(verbose_name = "ABCD2", choices = _ESCALA_AIT, blank = True, null=True)
         hemo_localizacion = models.CharField(verbose_name ="HEMO localización", choices = _HEMO_TIPO, max_length = 2)
         hemo_etiologia = models.CharField(verbose_name = "HEMO etiología", choices = _HEMO_ETIOLOGIA, max_length = 2)
         ev = models.CharField(verbose_name = "EV", choices = _SI_NO_INDET, max_length = 2)
         recanalizacion_dtc = models.CharField(verbose_name = "Recanalización doble transcraneal", choices = _SI_NO_INDET, max_length = 2)
         oclusion = models.CharField(verbose_name = "Oclusión", choices = _SI_NO_INDET, max_length = 2)
         oclusion_lugar = models.CharField( verbose_name = "Lugar de oclusión", choices = _OCLUSION, max_length = 2)
-        tibidtc = models.IntegerField(verbose_name = "TIBI/DTC", choices = _TIBIDTC, blank = True)
+        tibidtc = models.IntegerField(verbose_name = "TIBI/DTC", choices = _TIBIDTC, blank = True, null=True)
         tratamiento_interarterial = models.CharField(verbose_name = "Tratamiento Interarterial", choices = _SI_NO_INDET, max_length = 2)
 
         def __str__(self):
@@ -176,43 +176,54 @@ class Episodio(models.Model):
             return self.paciente.nombre + " - " + _TIPO_ICTUS[int(self.tipo_ictus)][1] + " ("+self.fecha_inicio.strftime("%d de %B, %Y")+")"
         ###elf.paciente.nombre + " - "+self.tipo_ictus+" ("+str(self.h_default = timezone.nowinicio)+")"
 
+        def description(self):
+            locale.setlocale(locale.LC_TIME, '')
+            return self.fecha_inicio.strftime("%d de %B, %Y")+" - " + _TIPO_ICTUS[int(self.tipo_ictus)][1]
+
+
 class Basal(models.Model):
-        episodio = models.ForeignKey('Episodio')
-        ictus_previo = models.CharField(verbose_name ="Ictus previo", choices = _SI_NO_INDET, max_length = 2)
-        HTA = models.CharField(verbose_name = "Hipertensión", choices = _SI_NO_INDET, max_length = 2)
-        HTA_tiempo = models.IntegerField(verbose_name = "Tiempo evolucón HTA")
-        diabetes = models.CharField(verbose_name = "Diabetes mellitus", choices = _SI_NO_INDET, max_length = 2)
-        tipo_diabetes = models.CharField (verbose_name = "Tipo de DM", choices = _DIABETES, max_length = 2)
-        tiempo_diabetes = models.IntegerField(verbose_name = "Tiempo DM")
-        dislipemia = models.CharField(verbose_name = "Displipemia", choices = _SI_NO_INDET, max_length = 2)
-        tabaco = models.CharField(verbose_name = "Tabaco", choices = _TABACO, max_length = 2)
-        tabaco_paquetes_acumulados = models.IntegerField(verbose_name = "Paquetes/año acumulados")
-        alcohol = models.CharField(verbose_name = "Alcohol", choices = _ALCOHOL, max_length = 2)
-        ejercicio = models.CharField(verbose_name = "Ejercico físico", choices = _EJERCICIO, max_length = 2)
-        cardiopatia_isquemica = models.CharField(verbose_name = "Cardiopatía isquémica crónica", choices = _SI_NO_INDET, max_length = 2)
-        IAM = models.CharField(verbose_name = "Infarto agudo de miocardio", choices = _SI_NO_INDET, max_length  = 2)
-        otras_cardiopatias = models.CharField(verbose_name = "Otras cardiopatías", choices = _CARDIOPATIA, max_length = 2)
-        arritmia_previa  = models.CharField(verbose_name="Arritmia previa", choices = _SI_NO_INDET, max_length = 2) 
-        fap_previa = models.CharField(verbose_name="FAP previa", choices = _SI_NO_INDET, max_length = 2)
-        ACFA_previa  = models.CharField(verbose_name="ACFA previa", choices = _SI_NO_INDET, max_length = 2)
-        arteriopatia_perif_previa = models.CharField(verbose_name="Arteriopatía periférica previa", choices = _SI_NO_INDET, max_length = 2)
-        TVP  = models.CharField(verbose_name="Trombosis venosa profunda", choices = _SI_NO_INDET, max_length = 2)
-        migrana = models.CharField(verbose_name="Migraña", choices = _SI_NO_INDET, max_length = 2)
-        SAOS = models.CharField(verbose_name="Síndrome apnea obstructiva sueño", choices = _SI_NO_INDET, max_length = 2)
-        deterioro_cognitivo = models.CharField(verbose_name="Deterioro cognitivo", choices = _SI_NO_INDET, max_length = 2)
-        cancer = models.CharField(verbose_name="Cancer activo", choices = _SI_NO_INDET, max_length = 2)
-        cancer_tipo = models.TextField(verbose_name = "Tipo de cancer", max_length = 500)
-        anticoagulacion_previa  = models.CharField(verbose_name="Anticoagulación previa", choices = _SI_NO_INDET, max_length = 2)
-        antiagregacion_previa = models.CharField(verbose_name="Antiagregación previa", choices = _SI_NO_INDET, max_length = 2)
-        estatina_previas = models.CharField(verbose_name="Estatina previa", choices = _SI_NO_INDET, max_length = 2)
-        otras_patologias = models.TextField(verbose_name = "Otras patologías", max_length = 500, blank = True)
-        antecedentes_familiares = models.BooleanField(verbose_name = "Antecedentes familiares")
-        rankin = models.CharField(verbose_name="Escala de Rankin", choices= _RANKIN, max_length = 2)
-        
+    class Meta:
+        verbose_name_plural = "Basales"
+
+    episodio = models.ForeignKey('Episodio')
+    ictus_previo = models.CharField(verbose_name ="Ictus previo", choices = _SI_NO_INDET, max_length = 2)
+    HTA = models.CharField(verbose_name = "Hipertensión", choices = _SI_NO_INDET, max_length = 2)
+    HTA_tiempo = models.IntegerField(verbose_name = "Tiempo evolucón HTA")
+    diabetes = models.CharField(verbose_name = "Diabetes mellitus", choices = _SI_NO_INDET, max_length = 2)
+    tipo_diabetes = models.CharField (verbose_name = "Tipo de DM", choices = _DIABETES, max_length = 2)
+    tiempo_diabetes = models.IntegerField(verbose_name = "Tiempo DM")
+    dislipemia = models.CharField(verbose_name = "Displipemia", choices = _SI_NO_INDET, max_length = 2)
+    tabaco = models.CharField(verbose_name = "Tabaco", choices = _TABACO, max_length = 2)
+    tabaco_paquetes_acumulados = models.IntegerField(verbose_name = "Paquetes/año acumulados")
+    alcohol = models.CharField(verbose_name = "Alcohol", choices = _ALCOHOL, max_length = 2)
+    ejercicio = models.CharField(verbose_name = "Ejercico físico", choices = _EJERCICIO, max_length = 2)
+    cardiopatia_isquemica = models.CharField(verbose_name = "Cardiopatía isquémica crónica", choices = _SI_NO_INDET, max_length = 2)
+    IAM = models.CharField(verbose_name = "Infarto agudo de miocardio", choices = _SI_NO_INDET, max_length  = 2)
+    otras_cardiopatias = models.CharField(verbose_name = "Otras cardiopatías", choices = _CARDIOPATIA, max_length = 2)
+    arritmia_previa  = models.CharField(verbose_name="Arritmia previa", choices = _SI_NO_INDET, max_length = 2)
+    fap_previa = models.CharField(verbose_name="FAP previa", choices = _SI_NO_INDET, max_length = 2)
+    ACFA_previa  = models.CharField(verbose_name="ACFA previa", choices = _SI_NO_INDET, max_length = 2)
+    arteriopatia_perif_previa = models.CharField(verbose_name="Arteriopatía periférica previa", choices = _SI_NO_INDET, max_length = 2)
+    TVP  = models.CharField(verbose_name="Trombosis venosa profunda", choices = _SI_NO_INDET, max_length = 2)
+    migrana = models.CharField(verbose_name="Migraña", choices = _SI_NO_INDET, max_length = 2)
+    SAOS = models.CharField(verbose_name="Síndrome apnea obstructiva sueño", choices = _SI_NO_INDET, max_length = 2)
+    deterioro_cognitivo = models.CharField(verbose_name="Deterioro cognitivo", choices = _SI_NO_INDET, max_length = 2)
+    cancer = models.CharField(verbose_name="Cancer activo", choices = _SI_NO_INDET, max_length = 2)
+    cancer_tipo = models.TextField(verbose_name = "Tipo de cancer", max_length = 500)
+    anticoagulacion_previa  = models.CharField(verbose_name="Anticoagulación previa", choices = _SI_NO_INDET, max_length = 2)
+    antiagregacion_previa = models.CharField(verbose_name="Antiagregación previa", choices = _SI_NO_INDET, max_length = 2)
+    estatina_previas = models.CharField(verbose_name="Estatina previa", choices = _SI_NO_INDET, max_length = 2)
+    otras_patologias = models.TextField(verbose_name = "Otras patologías", max_length = 500, blank = True)
+    antecedentes_familiares = models.BooleanField(verbose_name = "Antecedentes familiares")
+    rankin = models.CharField(verbose_name="Escala de Rankin", choices= _RANKIN, max_length = 2)
+
 
 class Intervencion(models.Model):
-	episodio = models.ForeignKey('Episodio')
-	anticoag_nombre = models.CharField(max_length=300)
+    class Meta:
+        verbose_name_plural = "Intervenciones"
+
+    episodio = models.ForeignKey('Episodio')
+    anticoag_nombre = models.CharField(max_length=300)
 
 
 _TICI = (
@@ -225,21 +236,25 @@ _TICI = (
         )
 
 class Extraccion(models.Model):
-        episodio = models.ForeignKey('Episodio', null = True)
-        puncion = models.DateTimeField(verbose_name = "Punción arterial", default = timezone.now)
-        micro = models.DateTimeField(verbose_name = "Introcucción de microcateter", default = timezone.now)
-        rescate = models.DateTimeField(verbose_name = "Hora del rescate", default = timezone.now)
-        urokinasa = models.CharField(verbose_name = "Urokinasa", choices = _SI_NO_INDET, max_length = 2)
-        recanaliza_ia = models.BooleanField(verbose_name = "Recanalización después de IA", default = False)
-        tici = models.CharField(verbose_name = "TICI", choices = _TICI, max_length = 2)
-        oktici = models.CharField(verbose_name = "OKTICI", choices = _SI_NO_INDET, max_length = 2)
-        trombo = models.CharField( verbose_name = "Extracción de trombo", choices = _SI_NO_INDET, max_length = 2)
-        hora_ext = models.DateTimeField( verbose_name = "Hora de extracción", default = timezone.now)
-        peso_trombo = models.PositiveIntegerField (verbose_name="Peso (mg)")
-        aspecto_trombo =models.TextField( verbose_name = "Aspecto del trombo", max_length = 500, blank = True)
-        anatomia_patologica = models.TextField (verbose_name = "Anatomía patológica", max_length = 500, blank = True)
-        incidencias = models.TextField (verbose_name = "Incidencias", max_length = 500, blank = True)
-        otras  =models.TextField( verbose_name = "Otras", max_length = 500, blank=True)
+
+    class Meta:
+        verbose_name_plural = "Extracciones"
+
+    episodio = models.ForeignKey('Episodio', null = True)
+    puncion = models.DateTimeField(verbose_name = "Punción arterial", default = timezone.now)
+    micro = models.DateTimeField(verbose_name = "Introcucción de microcateter", default = timezone.now)
+    rescate = models.DateTimeField(verbose_name = "Hora del rescate", default = timezone.now)
+    urokinasa = models.CharField(verbose_name = "Urokinasa", choices = _SI_NO_INDET, max_length = 2)
+    recanaliza_ia = models.BooleanField(verbose_name = "Recanalización después de IA", default = False)
+    tici = models.CharField(verbose_name = "TICI", choices = _TICI, max_length = 2)
+    oktici = models.CharField(verbose_name = "OKTICI", choices = _SI_NO_INDET, max_length = 2)
+    trombo = models.CharField( verbose_name = "Extracción de trombo", choices = _SI_NO_INDET, max_length = 2)
+    hora_ext = models.DateTimeField( verbose_name = "Hora de extracción", default = timezone.now)
+    peso_trombo = models.PositiveIntegerField (verbose_name="Peso (mg)")
+    aspecto_trombo =models.TextField( verbose_name = "Aspecto del trombo", max_length = 500, blank = True)
+    anatomia_patologica = models.TextField (verbose_name = "Anatomía patológica", max_length = 500, blank = True)
+    incidencias = models.TextField (verbose_name = "Incidencias", max_length = 500, blank = True)
+    otras  =models.TextField( verbose_name = "Otras", max_length = 500, blank=True)
 
 
 _TRATAMIENTOS = (

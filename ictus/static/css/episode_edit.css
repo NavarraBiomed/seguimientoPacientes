@@ -1,0 +1,44 @@
+input[type="checkbox"]:not(:checked), [type="checkbox"]:checked{
+    opacity: 1;
+    position: initial;
+    margin-left: 0.5em;
+    vertical-align: middle;
+    margin: 2em 1em;
+}
+
+#episode-card input[type="checkbox"]{
+    opacity: 0;
+    position: absolute;
+}
+
+.select-wrapper + label{
+    position: initial;
+}
+
+.group-title{
+    font-size: 20px;
+    color: #505050;
+    font-weight: 300;
+    margin: 0 1em 1em;
+}
+
+
+
+.form_group {
+    margin: 1em 0 2em;
+}
+/* Not the first child */
+.form_group + .form_group{
+    padding-top: 2em;
+    border-top: 2px solid grey;
+}
+
+.unmaterialized-card [type="checkbox"] + label{
+    display: block;
+    padding-left: 0;
+}
+
+.unmaterialized-card [type="checkbox"] + label:before, [type="checkbox"]:not(.filled-in) + label:after {
+    content:"WEEEEEEEE";
+    display: none;
+}

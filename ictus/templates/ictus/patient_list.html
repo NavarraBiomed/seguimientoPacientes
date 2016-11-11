@@ -1,0 +1,30 @@
+{% extends 'ictus/base.html' %}
+{% load material_form %}
+
+{% block extra_header %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/card_row.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="card card-expand box-shadow">
+    <div class="card-title">Pacientes</div>
+    <div class="episode-list">
+    {% for patient in patients %}
+        <a href="{% url 'ictus.views.view_patient' patient_pk=patient.pk %}">
+        <div class="episode-row">
+            {{patient}}
+        </div>
+        </a>
+    {% endfor %}
+    </div>
+</div>
+
+<div class="fixed-action-btn" style="bottom: 3em; right: 5em;">
+    <a class="btn-floating btn-large red"  href = "{% url 'ictus.views.view_patient' %}">
+      <i class="material-icons">add</i>
+    </a>
+</div>
+
+{% endblock %}

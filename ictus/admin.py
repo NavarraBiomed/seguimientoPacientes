@@ -17,7 +17,7 @@ class EpisodioInLine(admin.StackedInline):
     #fields = ("h_inicio", 'tipo')
     #readonly_fields = ('tipo_ictus',)
 
-class IntervencionInLine(admin.TabularInline):
+class IntervencionInLine(admin.StackedInline):
     model = Intervencion
     extra = 0
     show_change_link = True
@@ -26,11 +26,11 @@ class ExtraccionInLine(admin.StackedInline):
     model = Extraccion
     extra = 0
     
-class TratamientoInLine(admin.TabularInline):
+class TratamientoInLine(admin.StackedInline):
     model = Tratamiento
     extra = 0
 
-class SeguimientoInLine(admin.TabularInline):
+class SeguimientoInLine(admin.StackedInline):
     model = Seguimiento
     extra = 0
 

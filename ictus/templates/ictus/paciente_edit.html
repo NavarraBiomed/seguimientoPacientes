@@ -1,0 +1,42 @@
+{% extends 'ictus/base.html' %}
+{% load material_form %}
+
+{% block extra_header %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/card_row.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="card card-expand box-shadow">
+  <div class="card-title">{% if new %}
+        Nuevo paciente
+        {% else %}
+        Editar paciente
+        {% endif %}</div>
+<form method="POST" class="viewform">{% csrf_token %}
+{% form %}
+
+{% endform %}
+<button type="submit" name="_submit" class="btn btn-primary btn-lg">Guardar</button>
+</div>
+
+{% if not new %}
+<div class="card card-expand box-shadow">
+    <div class="card-title">Episodios</div>
+    <div class="episode-list">
+    {% for episode in episodes %}
+        <a href="{% url 'ictus.views.view_episode' episode_pk=episode.pk %}">
+        <div class="episode-row">
+            {{episode.description}}
+        </div>
+        </a>
+    {% endfor %}
+    </div>
+    <a href="{% url 'ictus.views.new_episode' patient_pk=patient.pk %}">
+        <div class="btn btn-primary btn-lg">Añadir Episodio</div>
+    </a>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,154 @@
+body{
+	font-family: "Roboto", sans-serif;
+	margin: 0;
+	background-color: #eee;
+}
+
+a{
+	color: inherit;
+	text-decoration: inherit;
+}
+
+#wrapper{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+#container{
+	flex: 1;
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.right{
+	float: right;
+}
+
+.page-header{
+	font-weight: 300;
+	font-size: 3em;
+}
+
+.page-header-up{
+	padding: 0.25em;
+	padding-left: 1em;
+}
+
+
+#logout{
+	font-size: 1rem;	
+	margin: 1em 2em;
+	
+}
+
+#logout a{
+	text-decoration: underline;
+}
+
+.card {
+    position: relative;
+    margin: 3rem 0 1rem 0;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    border-radius: 2px;
+    padding: 2em;
+
+}
+
+.card-expand{
+	width: 90vw;
+    max-width: 50em;
+}
+
+.card-title{
+	font-size: 1.5em;
+	margin: 0 1em 1em;
+	font-weight: lighter;
+}
+
+.card-element{
+	background: #f5f5f5;
+	padding: 1em;
+
+}
+
+.card-corner-button{
+	position: absolute;
+	top: 0.5em;
+	right: 0.5em;
+	font-size: 2.5em;
+}
+
+.card-cell{
+	background-color: #F1F1F1;
+	margin: 0.5em;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	padding: 1em;
+	font-weight: 500;
+	width: 10em;
+	height: 9em;
+}
+
+.card-cell-icon-div{
+	
+	display: flex;
+	justify-content: center;
+	margin: -0.2em;
+}
+
+.card-cell-icon{
+	font-size: 4em !important;
+}
+
+.card-cell-buttons{
+	display: flex;
+	flex: 1;
+	align-items: flex-end;	
+    justify-content: center;
+}
+
+.card-cell .card-cell-title{
+	display: flex;
+	justify-content: center;
+}
+
+.card-cell-title span{
+	text-align: center;
+}
+
+.card-table{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.box-shadow{
+	    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.green{
+	background-color: #4CAF50 !important;
+	color:white;
+}
+
+.green-text, .card-element div{
+	color: #74A276 !important;
+}
+
+.green-text-dark{
+	color: #388E3C !important;
+}
+
+.green-dark {
+    background-color: #388E3C !important;
+}
+

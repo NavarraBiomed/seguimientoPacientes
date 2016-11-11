@@ -1,0 +1,40 @@
+{% load staticfiles %}
+<html>
+<head>
+<title>Studies</title>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link href="/static/material/css/materialize.css" rel="stylesheet">
+<link href="/static/material/css/material-design-iconic-font.css" rel="stylesheet">
+<link href="/static/material/css/jquery.datetimepicker.css" rel="stylesheet">
+<link href="/static/material/css/responsive.dataTables.css" rel="stylesheet">
+<link href="/static/material/css/forms.css" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+{% include 'material/includes/material_js.html' %}
+{% block extra_header %}
+{% endblock %}
+</head>
+<body>
+    <div id="wrapper">
+        <div class="page-header green">
+            <div class="page-header-up green">
+                <a href="/">Ictus</a>
+                <div id="logout" class="right">{% if user_prof.user.is_authenticated %}{{user}} (<a href="/logout/">Log out</a>){% endif %}</div>
+            </div>
+            <div class="nav-bar green-dark">
+                {% for crumb in breadcrumbs %}
+                    <a class = "nav-item" href="{{crumb.link}}">{{crumb.name}}</a>
+                    <span>⟩</span>
+                {% endfor %}
+
+            </div>
+
+        </div>
+        <div id="container">
+                {% block content %}
+                {% endblock %}
+        </div>
+    </div>
+</body>

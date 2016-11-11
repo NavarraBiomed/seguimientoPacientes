@@ -1,0 +1,75 @@
+{% extends 'ictus/base.html' %}
+{% load material_form %}
+
+{% block extra_header %}
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/episode_edit.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+  <form method="post" action="">
+      {% csrf_token %}
+      <div class="card card-expand box-shadow">
+          <div class="card-title">Episodio de {{patient}}</div>
+          <div id="episode-card">
+            {% form  %}
+            {% endform %}
+          </div>
+    </div>
+
+{% if not new %}
+    {{ basal_formset.management_form }}
+    <div class="card card-expand box-shadow unmaterialized-card">
+        <div class="card-title">Basales</div>
+        {% for form in basal_formset %}
+        <div class="form_group">{{form}}</div>
+        {% endfor %}
+        <input type='submit' name='add_basal' class="btn btn-primary btn-lg" value="Añadir Basal"/>
+    </div>
+
+      {{ extraction_formset.management_form }}
+      <div class="card card-expand box-shadow unmaterialized-card">
+          <div class="card-title">Extracciones</div>
+          {% for form in extraction_formset %}
+          <div class="form_group">{{form}}</div>
+          {% endfor %}
+          <input type='submit' name='add_extraction' class="btn btn-primary btn-lg" value="Añadir Extracción"/>
+      </div>
+
+      {{ treatment_formset.management_form }}
+      <div class="card card-expand box-shadow unmaterialized-card">
+          <div class="card-title">Tratamientos</div>
+          {% for form in treatment_formset %}
+          <div class="form_group">{{form}}</div>
+          {% endfor %}
+          <input type='submit' name='add_treatment' class="btn btn-primary btn-lg" value="Añadir Tratamiento"/>
+      </div>
+
+    {{ intervention_formset.management_form }}
+    <div class="card card-expand box-shadow unmaterialized-card">
+        <div class="card-title">Intervenciones</div>
+        {% for form in intervention_formset %}
+        <div class="form_group">{{form}}</div>
+        {% endfor %}
+        <input type='submit' name='add_intervention' class="btn btn-primary btn-lg" value="Añadir Intervención"/>
+      </div>
+
+      {{ seguimiento_formset.management_form }}
+      <div class="card card-expand box-shadow unmaterialized-card">
+          <div class="card-title">Seguimiento</div>
+          {% for form in seguimiento_formset %}
+          <div class="form_group">{{form}}</div>
+          {% endfor %}
+          <input type='submit' name='add_seguimiento' class="btn btn-primary btn-lg" value="Añadir Seguimiento"/>
+        </div>
+
+{% endif %}
+      <button type="submit" name="_submit" class="btn btn-primary btn-lg">Guardar</button>
+  </form>
+
+
+
+
+{% endblock %}
