@@ -13,8 +13,12 @@
     <div class="episode-list">
     {% for patient in patients %}
         <a href="{% url 'ictus.views.view_patient' patient_pk=patient.pk %}">
-        <div class="episode-row">
+        <div class="card-row">
             {{patient}}
+
+            {% if not patient.is_complete %}
+            <div class="incomplete_indicator"></div>
+            {% endif %}
         </div>
         </a>
     {% endfor %}

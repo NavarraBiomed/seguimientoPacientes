@@ -27,8 +27,11 @@
     <div class="episode-list">
     {% for episode in episodes %}
         <a href="{% url 'ictus.views.view_episode' episode_pk=episode.pk %}">
-        <div class="episode-row">
+        <div class="card-row">
             {{episode.description}}
+            {% if not episode.completo %}
+            <div class="incomplete_indicator"></div>
+            {% endif %}
         </div>
         </a>
     {% endfor %}

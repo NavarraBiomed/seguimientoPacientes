@@ -26,14 +26,18 @@ class EpisodeForm(forms.ModelForm):
         exclude = ('paciente',)
 
     layout = Layout(
+        Row("completo", "lesion"),
         Row("fecha_inicio", "h_inicio", "hora_inicio_indet"),
         Row("tipo_ictus"),
         Row("nihss_ingreso", "nihss_alta", "mrs_alta"),
         Row("toast", "oxfordshire"),
-        Row("ait", "ait_duracion", "ait_neuroimagen", "ait_bcd2"),
+        Row("ait", "ait_duracion", "ait_previo",),
+        Row("ait_neuroimagen", "ait_bcd2", "ait_bcd3"),
         Row("hemo_localizacion", "hemo_etiologia"),
         Row("ev", "recanalizacion_dtc"),
         Row("oclusion", "oclusion_lugar"),
-        Row("tibidtc", "tratamiento_interarterial")
-
+        Row("tibidtc", "tratamiento_interarterial"),
+        Row("aspect_basal","acm_hiperdensa"),
+        Row("esus","clasif_sen"),
+        Row("comentarios",),
     )
