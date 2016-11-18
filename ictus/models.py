@@ -342,6 +342,7 @@ class Seguimiento(models.Model):
         nihss_3meses =  models.IntegerField( verbose_name = "NIHSS 3 meses", choices = _NIHSS_3M, blank=True, null=True)
         toast_3meses = models.CharField( verbose_name = "TOAST 3 meses", choices = _TOAST, max_length = 2, blank=True, null=True)
         rankin_3meses = models.CharField(verbose_name="Escala de Rankin 3 meses", choices= _RANKIN, max_length = 2, blank=True, null=True)
+        causa_muerte  = models.TextField( verbose_name = "Causa de la muerte", max_length = 3000, blank=True, null=True)
         muertevascular = models.CharField( verbose_name = "Muerte de causa vascular", choices = _NO_SI, max_length = 2, blank=True, null=True)
         fecha_muerte = models.DateField(verbose_name = "Fecha de la muerte", blank=True, null=True)
         fop = models.CharField( verbose_name = "Presencia de foramen oval permeable", choices = _NO_SI, max_length = 2, blank=True, null=True)
