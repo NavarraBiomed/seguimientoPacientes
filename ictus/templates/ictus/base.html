@@ -21,7 +21,7 @@
         <div class="page-header green">
             <div class="page-header-up green">
                 <a href="/">Ictus</a>
-                <div id="logout" class="right">{% if user_prof.user.is_authenticated %}{{user}} (<a href="/logout/">Log out</a>){% endif %}</div>
+                <div id="logout" class="right">{% if user.is_authenticated %}{{user}} (<a href="/logout/">Log out</a>){% endif %}</div>
             </div>
             <div class="nav-bar green-dark">
                 {% for crumb in breadcrumbs %}

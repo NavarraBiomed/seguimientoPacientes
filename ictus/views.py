@@ -33,6 +33,8 @@ def generate_breadcrumbs(**kwargs):
 
     return breadcrumbs
 
+
+@login_required
 def patient_list(request):
     patients = Paciente.objects.all()
 
@@ -42,6 +44,7 @@ def patient_list(request):
 
 
 # Create your views here.
+@login_required
 def view_patient(request, patient_pk=None):
 
     try:
@@ -90,6 +93,7 @@ def view_patient(request, patient_pk=None):
             'breadcrumbs':breadcrumbs,
             })
 
+@login_required
 def new_episode(request,patient_pk):
     patient = Paciente.objects.get(pk=patient_pk)
     breadcrumbs = generate_breadcrumbs(patient=patient, new_episode=True)
@@ -113,6 +117,7 @@ def new_episode(request,patient_pk):
         'breadcrumbs':breadcrumbs,
     })
 
+@login_required
 def view_episode(request, episode_pk):
 
     episode = Episodio.objects.get(pk=episode_pk)

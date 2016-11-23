@@ -262,9 +262,9 @@ class Intervencion(models.Model):
     anticoag_nombre = models.CharField(max_length=300, blank=True, null=True)
     reacanalizacdtc = models.IntegerField(verbose_name="Recanalizacion durante rtpa",choices=_NO_SI, blank=True, null=True)
     iniciovena = models.FloatField(verbose_name="Tiempo inicio vena", blank=True, null=True)
-    mejoriaNIHSS4ev = models.IntegerField(verbose_name="ev -Mejoria de 4 puntos o mas en la escala nihss", choices=_NO_SI, blank=True, null=True)
+    mejoriaNIHSS4ev = models.IntegerField(verbose_name="EV -Mejoria de 4 puntos o mas en la escala nihss", choices=_NO_SI, blank=True, null=True)
     iniciomicro = models.FloatField(verbose_name="Tiempo inicio micro", blank=True, null=True)
-    mejoriaNIHSS4ia = models.IntegerField(verbose_name="ia - Mejoria de 4 puntos o mas en la escala nihss", choices=_NO_SI, blank=True, null=True)
+    mejoriaNIHSS4ia = models.IntegerField(verbose_name="IA - Mejoria de 4 puntos o mas en la escala nihss", choices=_NO_SI, blank=True, null=True)
 
     deterioro = models.IntegerField(verbose_name="Deterioro", choices=_NO_SI, blank=True, null=True)
     fluctuacion = models.IntegerField(verbose_name="Fluctuación", choices=_NO_SI, blank=True, null=True)
