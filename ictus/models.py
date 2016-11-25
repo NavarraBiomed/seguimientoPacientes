@@ -158,6 +158,7 @@ class Paciente(models.Model):
     def __str__(self):
         return str(self.NHC)
 
+
 class Episodio(models.Model):
         paciente = models.ForeignKey('Paciente')
         completo = models.BooleanField( verbose_name = "Completo", default = False, blank=True)
