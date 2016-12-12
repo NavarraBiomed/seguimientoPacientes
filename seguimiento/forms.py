@@ -19,9 +19,3 @@ class RegistrationForm(forms.Form):
                     Fieldset('Pesonal details',
                              Row('first_name', 'last_name'),
                              'gender', 'receive_news', 'agree_toc'))
-
-class EpisodioForm(forms.ModelForm):
-
-	class Meta:
-		model = Episodio
-		fields = ('paciente', 'fecha_inicio', 'tipo_ictus')

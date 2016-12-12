@@ -13,8 +13,8 @@ class PacienteForm(forms.ModelForm):
         exclude = ()
 
     layout = Layout(
-            Row('NHC', 'nombre', 'iniciales'),
-            Row('fecha_nacimiento', 'genero', 'grupo_etnico'),
+            Row('nhc', 'iniciales'),
+            Row('fechanacim', 'sexo', 'grupoetnico'),
 
             )
 
@@ -27,17 +27,15 @@ class EpisodeForm(forms.ModelForm):
 
     layout = Layout(
         Row("completo", "lesion"),
-        Row("fecha_inicio", "h_inicio", "hora_inicio_indet"),
-        Row("tipo_ictus"),
-        Row("nihss_ingreso", "nihss_alta", "mrs_alta"),
-        Row("toast", "oxfordshire"),
-        Row("ait", "ait_duracion", "ait_previo",),
-        Row("ait_neuroimagen", "ait_bcd2", "ait_bcd3"),
-        Row("hemo_localizacion", "hemo_etiologia"),
-        Row("ev", "recanalizacion_dtc"),
-        Row("oclusion", "oclusion_lugar"),
-        Row("tibidtc", "tratamiento_interarterial"),
-        Row("aspect_basal","acm_hiperdensa"),
-        Row("esus","clasif_sen"),
-        Row("comentarios",),
+        Row("fechaictus", "h_inicio", "h_inicioindet"),
+        Row("nihssb", "nihssalta", "rankinalta"),
+        Row("toast", "toastindet"),
+        Row("mimic", "oxfordshire"),
+        Row("ait", "aitprevio", "aitdurac", "aitneuroimagen"),
+        Row("abcd2", "abcd3"),
+        Row("ev", "recanalizacdtc"),
+        Row("ia", "aspect_basal"),
+        Row("acm_hiperdensa", "esus", "clasifsen"),
+        Row("comentarios")
+
     )

@@ -9,7 +9,7 @@ from material import LayoutMixin, Layout, Fieldset, Inline, Row, Span2, Span5, S
 def episodio_nuevo(request):
 	form = EpisodioForm()
 	return render(request, 'ictus/episodio_edit.html', {'form': form})
-'''
+
 
 class episodio_nuevo(LayoutMixin,
                       extra_views.NamedFormsetsMixin,
@@ -22,3 +22,4 @@ class episodio_nuevo(LayoutMixin,
                  Row(Span7('address'), Span5('zipcode')),
                  Row(Span5('city'), Span2('state'), Span5('country'))),
     )
+'''

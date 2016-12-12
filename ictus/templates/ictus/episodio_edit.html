@@ -32,20 +32,11 @@
 
       {{ extraction_formset.management_form }}
       <div class="card card-expand box-shadow unmaterialized-card">
-          <div class="card-title">Extracciones</div>
+          <div class="card-title">Intraarterial</div>
           {% for form in extraction_formset %}
           <div class="form_group">{{form}}</div>
           {% endfor %}
-          <input type='submit' name='add_extraction' class="btn btn-primary btn-lg" value="Añadir Extracción"/>
-      </div>
-
-      {{ treatment_formset.management_form }}
-      <div class="card card-expand box-shadow unmaterialized-card">
-          <div class="card-title">Tratamientos</div>
-          {% for form in treatment_formset %}
-          <div class="form_group">{{form}}</div>
-          {% endfor %}
-          <input type='submit' name='add_treatment' class="btn btn-primary btn-lg" value="Añadir Tratamiento"/>
+          <input type='submit' name='add_extraction' class="btn btn-primary btn-lg" value="Añadir Intraarterial"/>
       </div>
 
     {{ intervention_formset.management_form }}

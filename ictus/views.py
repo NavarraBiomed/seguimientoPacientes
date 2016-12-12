@@ -37,7 +37,6 @@ def generate_breadcrumbs(**kwargs):
 @login_required
 def patient_list(request):
     patients = Paciente.objects.all()
-
     return render(request,'ictus/patient_list.html',{
         'patients': patients,
     })
@@ -49,7 +48,7 @@ def view_patient(request, patient_pk=None):
 
     try:
         patient = Paciente.objects.get(pk = patient_pk)
-        episodes = patient.episodio_set.all()
+        episodes = patient.episodios.all()
     except:
         patient = None
         episodes = None
@@ -76,11 +75,10 @@ def view_patient(request, patient_pk=None):
                 'breadcrumbs':breadcrumbs,
                 })
 
-            #raise Exception("Form isn't valid. Form type: {}".format( type(form) ))
     else:
         if not is_new:
             form = PacienteForm(instance = patient)
-            episodes = patient.episodio_set.all()
+            episodes = patient.episodios.all()
         else:
             form = PacienteForm()
             episodes = None
@@ -125,8 +123,7 @@ def view_episode(request, episode_pk):
     breadcrumbs = generate_breadcrumbs(patient=episode.paciente, episode=episode)
 
     BasalInLineFormSet = inlineformset_factory(Episodio, Basal, extra=0, exclude=() )
-    ExtractionInLineFormSet = inlineformset_factory(Episodio, Extraccion, extra=0, exclude=() )
-    TreatmentInlineFormSet = inlineformset_factory(Episodio, Tratamiento , extra=0, exclude=() )
+    ExtractionInLineFormSet = inlineformset_factory(Episodio, Intraarterial, extra=0, exclude=() )
     InterventionInlineFormSet = inlineformset_factory(Episodio, Intervencion , extra=0, exclude=() )
     SeguimientoInLineFormSet = inlineformset_factory(Episodio, Seguimiento, extra=0, exclude=() )
 
@@ -138,11 +135,10 @@ def view_episode(request, episode_pk):
         basal_formset = BasalInLineFormSet(request.POST, request.FILES, instance=episode)
         extraction_formset = ExtractionInLineFormSet(request.POST, request.FILES, instance=episode)
         intervention_formset = InterventionInlineFormSet(request.POST, request.FILES, instance=episode)
-        treatment_formset = TreatmentInlineFormSet(request.POST, request.FILES, instance=episode)
         seguimiento_formset = SeguimientoInLineFormSet(request.POST, request.FILES, instance=episode)
 
         all_valid = True
-        forms = [episode_form, basal_formset, extraction_formset, intervention_formset, treatment_formset, seguimiento_formset]
+        forms = [episode_form, basal_formset, extraction_formset, intervention_formset, seguimiento_formset]
         for f in forms:
             if f.is_valid():
                 f.save()
@@ -154,7 +150,6 @@ def view_episode(request, episode_pk):
                 "form":episode_form,
                 "basal_formset": basal_formset,
                 "extraction_formset": extraction_formset,
-                "treatment_formset": treatment_formset,
                 "intervention_formset": intervention_formset,
                 "seguimiento_formset": seguimiento_formset,
                 "patient":episode.paciente,
@@ -172,9 +167,7 @@ def view_episode(request, episode_pk):
             if "add_basal" in request.POST:
                 BasalInLineFormSet = inlineformset_factory(Episodio, Basal , extra=1, exclude=() )
             if "add_extraction" in request.POST:
-                ExtractionInLineFormSet = inlineformset_factory(Episodio, Extraccion , extra=1, exclude=() )
-            if "add_treatment" in request.POST:
-                TreatmentInlineFormSet = inlineformset_factory(Episodio, Tratamiento , extra=1, exclude=() )
+                ExtractionInLineFormSet = inlineformset_factory(Episodio, Intraarterial , extra=1, exclude=() )
             if "add_intervention" in request.POST:
                 InterventionInlineFormSet = inlineformset_factory(Episodio, Intervencion , extra=1, exclude=() )
             if "add_seguimiento" in request.POST:
@@ -182,7 +175,6 @@ def view_episode(request, episode_pk):
 
             basal_formset = BasalInLineFormSet(instance=episode)
             extraction_formset = ExtractionInLineFormSet(instance=episode)
-            treatment_formset = TreatmentInlineFormSet(instance=episode)
             intervention_formset = InterventionInlineFormSet(instance=episode)
             seguimiento_formset = SeguimientoInLineFormSet(instance=episode)
 
@@ -190,7 +182,6 @@ def view_episode(request, episode_pk):
                 "form":episode_form,
                 "basal_formset": basal_formset,
                 "extraction_formset": extraction_formset,
-                "treatment_formset": treatment_formset,
                 "intervention_formset":intervention_formset,
                 "seguimiento_formset": seguimiento_formset,
                 "patient":episode.paciente,
@@ -205,7 +196,6 @@ def view_episode(request, episode_pk):
         episode_form = EpisodeForm(instance = episode)
         basal_formset = BasalInLineFormSet(instance=episode)
         extraction_formset = ExtractionInLineFormSet(instance=episode)
-        treatment_formset = TreatmentInlineFormSet(instance=episode)
         intervention_formset = InterventionInlineFormSet(instance=episode)
         seguimiento_formset = SeguimientoInLineFormSet(instance=episode)
 
@@ -213,7 +203,6 @@ def view_episode(request, episode_pk):
             "form":episode_form,
             "basal_formset": basal_formset,
             "extraction_formset": extraction_formset,
-            "treatment_formset": treatment_formset,
             "intervention_formset":intervention_formset,
             "seguimiento_formset": seguimiento_formset,
             "patient":episode.paciente,

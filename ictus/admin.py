@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Paciente, Episodio, Basal, Intervencion, Extraccion, Tratamiento, Seguimiento
+from .models import *
 
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
@@ -22,20 +22,17 @@ class IntervencionInLine(admin.StackedInline):
     extra = 0
     show_change_link = True
 
-class ExtraccionInLine(admin.StackedInline):
-    model = Extraccion
+class IntraarterialInLine(admin.StackedInline):
+    model = Intraarterial
     extra = 0
-    
-class TratamientoInLine(admin.StackedInline):
-    model = Tratamiento
-    extra = 0
+
 
 class SeguimientoInLine(admin.StackedInline):
     model = Seguimiento
     extra = 0
 
 class EpisodioAdmin(admin.ModelAdmin):
-    inlines = [BasalInLine, IntervencionInLine, TratamientoInLine, ExtraccionInLine, SeguimientoInLine]
+    inlines = [BasalInLine, IntervencionInLine, IntraarterialInLine, SeguimientoInLine]
 
 class PacienteAdmin(admin.ModelAdmin):
     inlines = [EpisodioInLine,]
@@ -43,4 +40,4 @@ class PacienteAdmin(admin.ModelAdmin):
 admin.site.register(Paciente, PacienteAdmin)
 admin.site.register(Episodio, EpisodioAdmin)
 admin.site.register(Basal)
-admin.site.register(Extraccion)
+admin.site.register(Intraarterial)
