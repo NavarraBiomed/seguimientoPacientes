@@ -105,7 +105,7 @@ def add_episode(line, patient):
         episodio.save()
         #print_episode(episodio)
     except TypeError:
-        import pdb; pdb.set_trace()
+        pass
 
     return episodio
 
@@ -140,12 +140,10 @@ def add_model(model_name, line, episode):
         setattr(model, field, value )
 
 
-    if 'recurrenciavascfecha' in fields: model.recurrenciavascfecha = None
-
     try:
         model.save()
     except TypeError:
-        import pdb; pdb.set_trace()
+        pass
 
     debug("----Nuevo "+model_name)
     return model
