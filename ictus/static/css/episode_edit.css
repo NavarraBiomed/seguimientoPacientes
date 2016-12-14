@@ -42,3 +42,7 @@ input[type="checkbox"]:not(:checked), [type="checkbox"]:checked{
     content:"WEEEEEEEE";
     display: none;
 }
+
+.errorlist{
+    color:red;
+}

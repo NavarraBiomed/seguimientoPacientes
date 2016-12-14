@@ -26,6 +26,7 @@ class EpisodeForm(forms.ModelForm):
         exclude = ('paciente',)
 
     layout = Layout(
+        Row('idmuestra', 'idtrombo'),
         Row("completo", "lesion"),
         Row("fechaictus", "h_inicio", "h_inicioindet"),
         Row("nihssb", "nihssalta", "rankinalta"),

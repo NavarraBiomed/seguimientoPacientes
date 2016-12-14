@@ -51,13 +51,13 @@ _ALCOHOL = (
 
 
 _RANKIN = (
-        ("0", "Sin síntomas"),
-        ("1", "Sin incapacidad importante"),
-        ("2", "Incapacidad leve"),
-        ("3", "Incapacidad moderada"),
-        ("4", "Incapacidad moderadamente grave"),
-        ("5", "Incapacidad grave"),
-        ("6", "Muerte")
+        (0, "Sin síntomas"),
+        (1, "Sin incapacidad importante"),
+        (2, "Incapacidad leve"),
+        (3, "Incapacidad moderada"),
+        (4, "Incapacidad moderadamente grave"),
+        (5, "Incapacidad grave"),
+        (6, "Muerte")
         )
 
 
@@ -111,8 +111,8 @@ class Paciente(models.Model):
 
 class Episodio(models.Model):
         paciente = models.ForeignKey('Paciente', related_name="episodios")
-        idmuestra = models.CharField(verbose_name="ID", max_length=16)
-        idtrombo = models.CharField(verbose_name="ID2", max_length=16)
+        idmuestra = models.CharField(verbose_name="ID Muestra", max_length=16)
+        idtrombo = models.CharField(verbose_name="ID Trombo", max_length=16, blank=True, null=True)
 
         completo = models.BooleanField( verbose_name = "Completo", default = False, blank=True)
         lesion = models.BooleanField( verbose_name = "Lesión", default = False, blank=True)
@@ -145,7 +145,10 @@ class Episodio(models.Model):
 
         def __str__(self):
             locale.setlocale(locale.LC_TIME, '')
-            return str(self.pk) + " - " + str(self.paciente)# + " - " + _TIPO_ICTUS[int(self.tipo_ictus)][1] + " ("+self.fecha_inicio.strftime("%d de %B, %Y")+")"
+            if self.idmuestra == self.idtrombo:
+                return self.idmuestra
+            else:
+                return self.idmuestra + " ("+ self.idtrombo +" )"
         ###elf.paciente.nombre + " - "+self.tipo_ictus+" ("+str(self.h_default = timezone.nowinicio)+")"
 
         def description(self):
