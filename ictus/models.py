@@ -72,10 +72,10 @@ _TOAST = (
         )
 
 _OXFORDSHIRE = (
-        ("0", "Infartos completos de la circulación anterior"),
-        ("1", "Infartos parciales de la circulación anterior"),
-        ("2", "Infartos lacunares"),
-        ("3", "infartos de la circulación posterior")
+        (0, "Infartos completos de la circulación anterior"),
+        (1, "Infartos parciales de la circulación anterior"),
+        (2, "Infartos lacunares"),
+        (3, "infartos de la circulación posterior")
         )
 
 _ESCALA_AIT = tuple(zip (range(0,8), range(0,8)))
