@@ -153,7 +153,7 @@ class Episodio(models.Model):
 
         def description(self):
             locale.setlocale(locale.LC_TIME, '')
-            return self.fechaictus.strftime("%d de %B, %Y")
+            return str(self)+ " - " + self.fechaictus.strftime("%d de %B, %Y")
 
 
 _TIPO_CARDIOPATIA = (
