@@ -145,7 +145,7 @@ class Episodio(models.Model):
 
         def __str__(self):
             locale.setlocale(locale.LC_TIME, '')
-            if self.idmuestra == self.idtrombo:
+            if self.idmuestra == self.idtrombo or self.idtrombo=="" or self.idtrombo==None:
                 return self.idmuestra
             else:
                 return self.idmuestra + " ("+ self.idtrombo +" )"
