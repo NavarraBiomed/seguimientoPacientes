@@ -4,16 +4,56 @@
 {% block extra_header %}
 {% load staticfiles %}
 <link rel="stylesheet" href="{% static 'css/card_row.css' %}">
+<link rel="stylesheet" href="{% static 'css/filters.css' %}">
+<script src="{% static 'js/filter_patients.js' %}"></script>
 {% endblock %}
 
 {% block content %}
+
+<div class="card card-expand box-shadow">
+    <div class="card-title">Filtrar</div>
+    <div class="filter-row">
+        <div class="filter-field">
+            <span>Iniciales</span><input class="filter-input" id="filter-iniciales" data-field="iniciales" value=""/>
+        </div>
+        <div class="filter-field">
+            <span>Completo</span>
+            <select class="filter-input" id="filter-completo" data-field="completo" >
+                <option value="">------</option>
+                <option value="True">Sí</option>
+                <option value="False">No</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="filter-row">
+        <div class="filter-field">
+            <span>ID Muestra</span><input class="filter-input" id="filter-idmuestra" data-field="idmuestra" value=""/>
+        </div>
+        <div class="filter-field">
+            <span>ID Trombo</span><input class="filter-input" id="filter-idtrombo" data-field="idtrombo" value=""/>
+        </div>
+
+    </div>
+
+</div>
+
 
 <div class="card card-expand box-shadow">
     <div class="card-title">Pacientes</div>
     <div class="episode-list">
     {% for patient in patients %}
         <a href="{% url 'ictus.views.view_patient' patient_pk=patient.pk %}">
-        <div class="card-row">
+        <div class="patient-row card-row">
+            <div class="row-data">
+                <div class="data patient-data" data-iniciales="{{patient.iniciales}}"></div>
+                <div class="data patient-data" data-completo="{{patient.is_complete}}"></div>
+                {% for episodio in patient.episodios.all %}
+                <div class="data episode-data" data-idmuestra="{{episodio.idmuestra}}"></div>
+                <div class="data episode-data" data-idtrombo="{{episodio.idtrombo}}"></div>
+
+                {% endfor %}
+            </div>
             {{patient}}
 
             {% if not patient.is_complete %}
