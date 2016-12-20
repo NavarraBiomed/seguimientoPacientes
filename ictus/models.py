@@ -51,13 +51,13 @@ _ALCOHOL = (
 
 
 _RANKIN = (
-        (0, "Sin síntomas"),
-        (1, "Sin incapacidad importante"),
-        (2, "Incapacidad leve"),
-        (3, "Incapacidad moderada"),
-        (4, "Incapacidad moderadamente grave"),
-        (5, "Incapacidad grave"),
-        (6, "Muerte")
+        (0, "0-Sin síntomas"),
+        (1, "1-Sin incapacidad importante"),
+        (2, "2-Incapacidad leve"),
+        (3, "3-Incapacidad moderada"),
+        (4, "4-Incapacidad moderadamente grave"),
+        (5, "5-Incapacidad grave"),
+        (6, "6-Muerte")
         )
 
 
@@ -134,8 +134,8 @@ class Episodio(models.Model):
         abcd2 = models.IntegerField(verbose_name = "ABCD2", choices = _ESCALA_AIT, blank=True, null=True)
         abcd3 = models.IntegerField(verbose_name = "ABCD3", choices = _ESCALA_AIT, blank=True, null=True)
         ev = models.IntegerField(verbose_name = "EV", choices = _NO_SI, blank=True, null=True)
-        recanalizacdtc = models.IntegerField(verbose_name = "Recanalización doble transcraneal", choices = _NO_SI, blank=True, null=True)
-        ia = models.IntegerField(verbose_name = "Tratamiento Interarterial", choices = _NO_SI, blank=True, null=True)
+        recanalizacdtc = models.IntegerField(verbose_name = "Recanalización doppler transcraneal", choices = _NO_SI, blank=True, null=True)
+        ia = models.IntegerField(verbose_name = "Tratamiento intraarterial", choices = _NO_SI, blank=True, null=True)
         aspect_basal = models.FloatField(verbose_name="Puntuacion ASPECTS BASAL", blank=True, null=True)
         acm_hiperdensa = models.IntegerField(verbose_name = "ACM hiperdensa", choices = _NO_SI, blank=True, null=True)
         esus = models.IntegerField(verbose_name = "ESUS", choices = _NO_SI, blank=True, null=True)
@@ -172,7 +172,6 @@ class Basal(models.Model):
     episodio = models.ForeignKey('Episodio')
 
     edad = models.IntegerField(verbose_name="Edad", blank=True, null=True)
-    anticoagnombre = models.CharField(max_length=300, blank=True, null=True)
     ictusaitprevio = models.IntegerField(verbose_name ="Ictus previo", choices = _NO_SI, blank=True, null=True)
     chadsvasc = models.FloatField(verbose_name="CHADSVASC", blank=True, null=True)
     hta = models.IntegerField(verbose_name = "Hipertensión", choices = _NO_SI, blank=True, null=True)
@@ -181,15 +180,16 @@ class Basal(models.Model):
     tabaquismo = models.IntegerField(verbose_name = "Tabaco", choices = _TABACO, blank=True, null=True)
     alcohol = models.IntegerField(verbose_name = "Alcohol", choices = _ALCOHOL, blank=True, null=True)
     fa = models.IntegerField(verbose_name="FAP previa", choices = _NO_SI, blank=True, null=True)
+    cardiopatia = models.IntegerField( verbose_name = "Cardiopatía", choices = _NO_SI, blank=True, null=True)
+    tipo_cardiopatia = models.IntegerField(verbose_name="Tipo de cardiopatía", choices=_TIPO_CARDIOPATIA, blank=True, null=True)
     arteriopatia_perif = models.IntegerField(verbose_name="Arteriopatía periférica previa", choices = _NO_SI, blank=True, null=True)
     cancer = models.IntegerField(verbose_name="Cancer activo", choices = _NO_SI, blank=True, null=True)
     anticoagulante  = models.IntegerField(verbose_name="Anticoagulación previa", choices = _NO_SI, blank=True, null=True)
+    anticoagnombre = models.CharField(max_length=300, blank=True, null=True)
     antiagregante = models.IntegerField(verbose_name="Antiagregación previa", choices = _NO_SI, blank=True, null=True)
     estatinas = models.IntegerField(verbose_name="Estatina previa", choices = _NO_SI, blank=True, null=True)
     rankinbasal = models.IntegerField(verbose_name="Escala de Rankin", choices= _RANKIN, blank=True, null=True)
     toast_ictusprev = models.IntegerField( verbose_name = "TOAST ictus previo", choices = _TOAST, blank=True, null=True)
-    cardiopatia = models.IntegerField( verbose_name = "Cardiopatía", choices = _NO_SI, blank=True, null=True)
-    tipo_cardiopatia = models.IntegerField(verbose_name="Tipo de cardiopatía", choices=_TIPO_CARDIOPATIA, blank=True, null=True)
     cancerdxposterior = models.IntegerField( verbose_name = "Cancer diagnosticado tras el ictus", choices = _NO_SI, null=True)
 
 
