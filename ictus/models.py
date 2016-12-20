@@ -3,8 +3,8 @@ from django.utils import timezone
 import locale
 
 _SEXO = (
-	("0", "Hombre"),
-	("1", "Mujer")
+	(0, "Hombre"),
+	(1, "Mujer")
 	)
 
 _TIPO = (
