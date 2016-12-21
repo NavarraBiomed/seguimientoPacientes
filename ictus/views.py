@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django import template
 from django.template.loader import get_template, TemplateDoesNotExist
 from django.forms import inlineformset_factory
+import json
 
 from .models import *
 from .forms import *
@@ -33,6 +34,29 @@ def generate_breadcrumbs(**kwargs):
 
     return breadcrumbs
 
+
+@login_required
+def analysis(request):
+    return render(request,'ictus/analysis.html',{})
+
+
+@login_required
+def get_data(request):
+
+    episodes = Episodio.objects.filter(mimic=0)
+    toast_scale = ["Aterotrombótico","Cardioembólico","Lacunar","De otra etiología determinada/causa infrecuente",
+                   "Indeterminado, >2 causas","Indeterminado, tras estudio completo","Indeterminado, estudio incompleto"]
+
+    data = []
+    for episode in episodes:
+        toast = episode.toast if episode.toast is not None else -1
+        new_episode = {'fecha': str(episode.fechaictus), 'hora':str(episode.h_inicio),
+                       'hora_indet': episode.h_inicioindet, 'toast': toast_scale[toast],
+                      }
+
+        data.append(new_episode)
+
+    return HttpResponse(json.dumps(data), content_type='application/json')
 
 @login_required
 def patient_list(request):

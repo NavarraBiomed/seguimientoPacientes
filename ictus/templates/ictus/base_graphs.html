@@ -1,0 +1,28 @@
+{% extends 'ictus/base.html' %}
+{% load staticfiles %}
+{% block extra_header %}
+	<link rel="stylesheet" href="{% static 'panel/lib/css/keen-dashboards.css' %}">
+	<link rel="stylesheet" href="{% static 'panel/lib/css/dc.css' %}">
+    <link rel="stylesheet" href="{% static 'css/analysis.css' %}">
+
+
+	<script language="javascript">var STATIC_URL = "{% static '' %}"</script>
+	<script src="{% static 'panel/lib/js/jquery.min.js' %}"></script>
+	<script src="{% static 'panel/lib/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'panel/lib/js/crossfilter.js' %}" type="text/javascript"></script>
+	<script src="{% static 'panel/lib/js/d3.js' %}"></script>
+	<script src="{% static 'panel/lib/js/dc.js' %}"></script>
+	<script src="{% static 'panel/lib/js/queue.js' %}" type="text/javascript"></script>
+	<script src="{% static 'panel/lib/js/keen.min.js' %}" type="text/javascript"></script>
+
+	<script src="{% static 'panel/js/utils.js' %}" type="text/javascript"></script>
+    <!--
+	<script src="{% static 'panel/js/reduce_functions.js' %}" type="text/javascript"></script>
+    -->
+	<script src="{% static 'panel/js/analysis.js' %}" type="text/javascript"></script>
+
+	{% block header_2 %}
+
+	{% endblock header_2 %}
+
+{% endblock extra_header %}

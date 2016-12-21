@@ -128,7 +128,7 @@ class Episodio(models.Model):
         mimic = models.IntegerField(verbose_name = "AIT o Ictus Mimic", choices = _NO_SI, blank=True, null=True)
         oxfordshire = models.IntegerField(verbose_name ="OXFORDSHIRE", choices = _OXFORDSHIRE, blank=True, null=True)
         ait = models.IntegerField(verbose_name = "AIT", choices = _NO_SI, blank=True, null=True)
-        aitprevio = models.IntegerField(verbose_name = "AIT", choices = _NO_SI, blank=True, null=True)
+        aitprevio = models.IntegerField(verbose_name = "AIT previo", choices = _NO_SI, blank=True, null=True)
         aitdurac = models.IntegerField(verbose_name = "Duración AIT (min)", blank=True, null=True)
         aitneuroimagen = models.IntegerField(verbose_name = "Neuroimagen AIT", choices = _NO_SI, blank=True, null=True)
         abcd2 = models.IntegerField(verbose_name = "ABCD2", choices = _ESCALA_AIT, blank=True, null=True)
