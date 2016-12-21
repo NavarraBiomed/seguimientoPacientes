@@ -10,7 +10,7 @@ urlpatterns = [
     url (r'^patient/(?P<patient_pk>[0-9]+)/$', views.view_patient, name ='view_patient'),
     url (r'^episode/(?P<episode_pk>[0-9]+)/$', views.view_episode, name ='view_episode'),
     url (r'^patient/(?P<patient_pk>[0-9]+)/new_episode/$', views.new_episode, name ='view_patient'),
-    url (r'^analysis/$', views.analysis, name="analysis"),
+    url (r'^analizar/$', views.analysis, name="analysis"),
     url (r'^data.json$', views.get_data, name="datajson"),
     url (r'^logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
 
